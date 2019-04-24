@@ -85,3 +85,15 @@ func (s *Server) ListUnspent(scripthash string) ([]*ListUnspentResult, error) {
 
 	return resp.Result, err
 }
+
+// ListUnspentAddress is a deprecated function for listing unspent transactions for a given address.
+func (s *Server) ListUnspentAddress(address string) ([]*ListUnspentResult, error) {
+	var resp ListUnspentResp
+
+	err := s.request("blockchain.address.listunspent", []interface{}{address}, &resp)
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Result, err
+}
